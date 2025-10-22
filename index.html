@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dilt's Dungeon: Physics Study Hub</title>
+<style>
+  /* Base Reset */
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+  body { background: #f9f9f9; color: #333; line-height: 1.6; }
+  a { text-decoration: none; color: inherit; }
+
+  /* Container */
+  .container { max-width: 1000px; margin: auto; padding: 30px; }
+
+  /* Header */
+  h1 { font-size: 3em; text-align: center; color: #1976d2; margin-bottom: 25px; }
+  h2 { font-size: 2em; color: #1976d2; margin-bottom: 15px; }
+
+  /* Navigation */
+  nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+  nav button {
+    padding: 14px 28px; border: none; border-radius: 12px; background: #ff9800;
+    color: white; font-weight: bold; cursor: pointer; transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  nav button:hover { background: #ffa733; transform: translateY(-2px); }
+
+  /* Sections */
+  section { display: none; animation: fade 0.4s; }
+  section.active { display: block; }
+  @keyframes fade { from {opacity: 0;} to {opacity:1;} }
+
+  /* Cards */
+  .card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+
+  /* Quiz Styling */
+  .quiz-question { margin-bottom: 18px; }
+  .quiz-option { margin-bottom: 12px; }
+  .quiz-option input { margin-right: 10px; }
+  .quiz-option.correct label { color: #4caf50; font-weight: bold; }
+  .quiz-option.wrong label { color: #f44336; font-weight: bold; }
+  #quiz-result { margin-top: 18px; font-weight: bold; font-size: 1.3em; color: #1976d2; }
+
+  /* Buttons */
+  .btn { background: #1976d2; color: white; padding: 12px 28px; border-radius: 12px; cursor: pointer; border: none; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+  .btn:hover { background: #2196f3; transform: translateY(-2px); }
+
+  /* Flashcards Grid */
+  .flashcards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .flashcard {
+    background: #e3f2fd;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    font-size: 1.1em;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s, background 0.3s;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flashcard:hover { transform: translateY(-5px); background: #bbdefb; }
+
+  /* Footer */
+  footer { text-align: center; margin-top: 50px; font-size: 1em; color: #666; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Dilt's Dungeon</h1>
+  
+  <nav>
+    <button onclick="showSection('study')">Study Material</button>
+    <button onclick="showSection('quiz')">Quiz</button>
+    <button onclick="showSection('flashcards')">Flashcards</button>
+  </nav>
+  
+  <!-- Study Section -->
+  <section id="study" class="active">
+    <div class="card">
+      <h2>Momentum & Impulse</h2>
+      <p><strong>Momentum (p):</strong> Product of mass and velocity. Vector quantity. Formula: <code>p = m * v</code></p>
+      <p><strong>Impulse (J):</strong> Change in momentum caused by a net force applied over time. Formula: <code>J = F * Δt = Δp</code></p>
+      <p><strong>Newton's Second Law:</strong> F = Δp / Δt → net force equals rate of change of momentum.</p>
+    </div>
+    <div class="card">
+      <h2>Changing Momentum: Force and Time</h2>
+      <ul>
+        <li>To <strong>reduce force</strong>, increase the time of impact.</li>
+        <li>Examples: padded dashboards, boxer riding the punch.</li>
+        <li>Bouncing objects: greater impulse than stopping.</li>
+        <li>Impulse is greater when object changes direction.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Conservation of Momentum</h2>
+      <ul>
+        <li>Total momentum before = total momentum after.</li>
+        <li>Vector quantity: direction matters in collisions and explosions.</li>
+        <li>Newton’s Third Law: forces are equal and opposite → impulses equal and opposite.</li>
+        <li>Examples: rockets, firecrackers, collisions.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Types of Collisions</h2>
+      <ul>
+        <li><strong>Elastic:</strong> Momentum & kinetic energy conserved.</li>
+        <li><strong>Inelastic:</strong> Momentum conserved, kinetic energy lost.</li>
+        <li><strong>Right-angle collisions:</strong> Equal momentum vectors → final motion at 45° if same mass.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Key Calculations</h2>
+      <ul>
+        <li>Momentum: p = m*v</li>
+        <li>Impulse: J = F*Δt = Δp</li>
+        <li>Inelastic collisions (sticking together): m1*v1 + m2*v2 = (m1+m2)*v_final</li>
+        <li>Elastic collisions or explosions: m1*v1 + m2*v2 = m1*v1_final + m2*v2_final</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Quiz Section -->
+  <section id="quiz">
+    <div class="card">
+      <h2>Interactive Quiz</h2>
+      <div id="quiz-container"></div>
+      <button class="btn" onclick="submitQuiz()">Submit</button>
+      <button class="btn" style="margin-left:10px;" onclick="loadQuiz()">Retake Quiz</button>
+      <div id="quiz-result"></div>
+    </div>
+  </section>
+
+  <!-- Flashcards Section -->
+  <section id="flashcards">
+    <div class="card">
+      <h2>Flashcards</h2>
+      <div class="flashcards-grid" id="flashcards-grid"></div>
+    </div>
+  </section>
+
+  <footer>
+    Dilt's Dungeon &copy; 2025 | Physics Study Hub
+  </footer>
+</div>
+
+<script>
+  // Navigation
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // Quiz functionality
+  const originalQuizData = [
+    {question: "What is the formula for momentum?", options: ["p = m * v", "J = F * Δt", "F = m * a", "KE = 0.5 * m * v^2"], answer: 0},
+    {question: "Impulse is...", options: ["Momentum itself", "Change in momentum", "Force times velocity", "Mass times acceleration"], answer: 1},
+    {question: "Which collision conserves kinetic energy?", options: ["Elastic", "Inelastic", "Sticky", "Explosive"], answer: 0},
+    {question: "To reduce force in an impact, you should...", options: ["Decrease time of impact", "Increase time of impact", "Increase mass", "Ignore momentum"], answer: 1},
+    {question: "Bouncing objects have...", options: ["Smaller impulse than stopping", "Greater impulse than stopping", "No momentum change", "Infinite force"], answer: 1}
+  ];
+
+  let quizData = [];
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function loadQuiz() {
+    quizData = JSON.parse(JSON.stringify(originalQuizData));
+    shuffle(quizData);
+    quizData.forEach(q => shuffle(q.options));
+
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+
+    quizData.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('quiz-question');
+      div.innerHTML = `<p>${q.question}</p>` + q.options.map((opt, idx) => `
+        <div class="quiz-option">
+          <input type="radio" name="q${i}" value="${idx}" id="q${i}o${idx}">
+          <label for="q${i}o${idx}">${opt}</label>
+        </div>`).join('');
+      container.appendChild(div);
+    });
+
+    document.getElementById('quiz-result').innerText = '';
+  }
+
+  function submitQuiz() {
+    let score = 0;
+    quizData.forEach((q, i) => {
+      const options = document.querySelectorAll(`.quiz-question:nth-child(${i+1}) .quiz-option`);
+      const selected = document.querySelector(`input[name="q${i}"]:checked`);
+      options.forEach(opt => opt.classList.remove('correct', 'wrong'));
+
+      const correctAnswerText = originalQuizData.find(oq => oq.question === q.question).options[originalQuizData.find(oq => oq.question === q.question).answer];
+      const correctIdx = q.options.indexOf(correctAnswerText);
+
+      if(selected) {
+        const selectedIdx = parseInt(selected.value);
+        if(q.options[selectedIdx] === correctAnswerText) {
+          options[selectedIdx].classList.add('correct');
+          score++;
+        } else {
+          options[selectedIdx].classList.add('wrong');
+          options[correctIdx].classList.add('correct');
+        }
+      } else {
+        options[correctIdx].classList.add('correct');
+      }
+    });
+
+    document.getElementById('quiz-result').innerText = `You scored ${score} out of ${quizData.length}!`;
+  }
+
+  loadQuiz();
+
+  // Flashcards
+  const flashcards = [
+    {front: "Momentum (p)", back: "Momentum is the product of mass and velocity: p = m*v."},
+    {front: "Impulse (J)", back: "Impulse is the change in momentum caused by a force over time: J = F*Δt = Δp."},
+    {front: "Newton's Second Law", back: "F = Δp / Δt → Net force equals rate of change of momentum."},
+    {front: "Reduce Force", back: "To reduce force, increase the time of impact."},
+    {front: "Bouncing vs Stopping", back: "Bouncing objects have greater impulse than stopping."},
+    {front: "Conservation of Momentum", back: "Total momentum before = total momentum after; vector quantity matters."},
+    {front: "Elastic Collision", back: "Momentum & kinetic energy are conserved."},
+    {front: "Inelastic Collision", back: "Momentum is conserved, kinetic energy is lost."},
+    {front: "Right-Angle Collision", back: "Equal momenta vectors → final motion at 45° if same mass."},
+    {front: "Rocket Propulsion", back: "Rocket gains forward momentum equal to backward momentum of gases."}
+  ];
+
+  const grid = document.getElementById('flashcards-grid');
+
+  flashcards.forEach((card, idx) => {
+    const div = document.createElement('div');
+    div.classList.add('flashcard');
+    div.innerText = card.front;
+    div.addEventListener('click', () => {
+      div.innerText = div.innerText === card.front ? card.back : card.front;
+    });
+    grid.appendChild(div);
+  });
+</script>
+
+</body>
+</html>
