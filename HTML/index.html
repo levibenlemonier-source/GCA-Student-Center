@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <title>GCA | Student Center</title>
+</head>
+<body>
+    <h1>GCA | Student Center</h1>
+
+    <label for="grade-selection">Select Grade: </label>
+
+    <select name="grade" id="grade-selection">
+        <option value="blank"></option>
+        <option value="9th">9th Grade</option>
+        <option value="10th">10th Grade</option>
+        <option value="11th">11th Grade</option>
+        <option value="12th">12th Grade</option>
+    </select>
+    
+    <script>
+        document.getElementById("grade-selection").addEventListener("change", function() {
+            if (this.value !== "blank") {
+                window.location.href = "grades/" + this.value + "-grade.html";
+            }
+        })
+    </script>
+</body>
+</html>
